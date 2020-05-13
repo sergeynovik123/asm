@@ -205,7 +205,7 @@ strcmp 		proc
 		dec si
 		dec di
 		mov ax, [si]
-		mov ax, [di]
+		sub ax, [di]
 
 		
 		ret
