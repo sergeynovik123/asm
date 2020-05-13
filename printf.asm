@@ -61,7 +61,7 @@ nextsimb:		cmp byte [ecx], 0		;
 			inc ecx				;		
 			jmp nextsimb			;
 												
-format_percent:	mov ebx, jmp_table			;
+format_percent:		mov ebx, jmp_table		;
 							;
 			inc ecx				;
 			cmp byte[ecx], '%'		;percent
@@ -139,7 +139,7 @@ wrongsimb:		mov eax, 4			;
 
 			jmp endstr			;
 
-simbprinted:	inc ecx					;
+simbprinted:		inc ecx				;
 			jmp nextsimb			;
 
 endstr:			pop ebp							
@@ -197,7 +197,7 @@ printdec:		test ecx, 80000000h			;
 			neg ecx					;ecx *= -1
 
 .positive:		mov eax, ecx				;
-				xor ecx, ecx			;
+			xor ecx, ecx				;
 
 .putinstk:		xor edx, edx				;
 			div ebx					;
@@ -208,7 +208,7 @@ printdec:		test ecx, 80000000h			;
 
 			mov edi, simbol 			;
 
-.printnumbs:	pop edx						;
+.printnumbs:		pop edx					;
 
 			add edx, '0'				;
 			mov [edi], edx				;
@@ -368,7 +368,7 @@ jmp_table:		dd bin,						;%b
 
 
 
-str_bin_pow     times 64 db '0' 
+str_bin_pow    		times 64 db '0' 
 minus:			db '-'
 simbol:			db 0
 bufchar:		db 0
