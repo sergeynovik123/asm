@@ -1,0 +1,45 @@
+
+1000:0100 bb 6601          Main:    MOV    BX, 0166h  
+1000:0103 b4 07                     MOV    AH, 07h    
+1000:0105 b2 ff                     MOV    DL, ffh    
+1000:0107 32 c0                     XOR    AL, AL     
+1000:0109 33 c9                     XOR    CX, CX     
+1000:010b e8 2400                   CALL   Proc0      
+1000:010e 81 f9 1701                CMP    CX, 0117h  
+1000:0112 75 06                     JNZ    Jmp0       
+1000:0114 e8 1300                   CALL   Proc1      
+1000:0117 eb 04                     JMP    Jmp1       
+1000:0119                           db     90         
+1000:011a                  Jmp0:                       
+1000:011a e8 0500                   CALL   Proc2      
+1000:011d                  Jmp1:                       
+1000:011d b8 004c                   MOV    AX, 4c00h  
+1000:0120 cd 21                     INT    21h        ;Exit
+1000:0122                  Proc2:                      
+1000:0122 b4 09                     MOV    AH, 09h    
+1000:0124 ba 5801                   MOV    DX, 0158h  
+1000:0127 cd 21                     INT    21h        ;"Access denied$"
+1000:0129 c3                        RET               
+1000:012a                  Proc1:                     
+1000:012a b4 09                     MOV    AH, 09h    
+1000:012c ba 4601                   MOV    DX, 0146h  
+1000:012f cd 21                     INT    21h        ;"Access is allowed$A"
+1000:0131 c3                        RET               
+1000:0132                  Proc0:                      
+1000:0132 cd 21                     INT    21h        ;Get char w/o echo
+1000:0134 3c 0d                     CMP    AL, 0dh    
+1000:0136 74 0d                     JZ     Jmp2       
+1000:0138 88 07                     MOV    BYTE PTR [BX], AL 
+1000:013a 43                        INC    BX         
+1000:013b 32 e4                     XOR    AH, AH     
+1000:013d 03 c8                     ADD    CX, AX     
+1000:013f b4 07                     MOV    AH, 07h    
+1000:0141 32 c0                     XOR    AL, AL     
+1000:0143 eb ed                     JMP    Proc0      
+1000:0145                  Jmp2:                       
+1000:0145 c3                        RET               
+1000:0146                  Data0:                      
+1000:0146                           db     'Access is allowed$Ac' 
+1000:0158                  Data1:                      
+1000:015a                           db     'cess denied$' 
+edd2:0000                  Data2:                      
