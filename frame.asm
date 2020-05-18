@@ -3,16 +3,16 @@
 org 100h
 
 ;===============================================================================
-VIDEOSEG equ 0b800h
-COLOR equ 40h					;0010 0000 
-COLOR_SHD equ 30h 				;0011 0000
-NEXT_LINE equ 80 * 2
+		VIDEOSEG equ 0b800h
+		COLOR equ 40h			;0010 0000 
+		COLOR_SHD equ 30h 		;0011 0000
+		NEXT_LINE equ 80 * 2
 ;===============================================================================
-DELAY 	macro
-	mov cx, 1h
-	mov ah, 86h
-	int 15h
-	endm
+DELAY 		macro
+		mov cx, 1h
+		mov ah, 86h
+		int 15h
+		endm
 ;===============================================================================
 start:		mov bx, VIDEOSEG
 		mov es, bx		
