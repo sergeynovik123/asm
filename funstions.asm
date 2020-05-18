@@ -2,7 +2,9 @@
 .code
 org 100h
 
-start:		
+locals @@
+
+start:
 
 
 		ret
@@ -107,7 +109,6 @@ strlen 		proc
 		ret
 		endp
 
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Find first entering char
 ; Entry:	di - pointer of start str
@@ -117,10 +118,12 @@ strlen 		proc
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strchr 		proc
 		
+			
 		xor di, di
                 or cx, 0FFFFh
-                cld
+@@loop:	        cld
 		repne scasb
+		jne @@loop
 		dec di	
 		
 		ret
@@ -192,7 +195,7 @@ strcmp 		proc
 		mov cx, 0FFFFh
 		cld
 		
-@@cmpbyte:	cmp byte ptr [si], 0h
+@@cmp:		cmp byte ptr [si], 0h
 		je @@endstr
 		cmp byte ptr [di], 0h
 		je @@endstr
@@ -203,7 +206,7 @@ strcmp 		proc
 		dec si
 		dec di
 		mov ax, [si]
-		sub ax, [di]
+		mov ax, [di]
 
 		
 		ret
@@ -217,3 +220,8 @@ Msg2: db 'CHa chA', 00h
 
 
 end start
+
+
+
+
+
