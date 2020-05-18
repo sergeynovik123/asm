@@ -24,6 +24,8 @@ _start:
 			push love
 			push newtest
 			call printf
+			
+			add esp, 6 * 4
 				
 			pop edx
 			pop ecx
