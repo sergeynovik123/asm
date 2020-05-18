@@ -2,7 +2,7 @@
 .code
 org 100h
 
-start:
+start:		
 
 
 		ret
@@ -192,7 +192,7 @@ strcmp 		proc
 		mov cx, 0FFFFh
 		cld
 		
-@@cmp:		cmp byte ptr [si], 0h
+@@cmpbyte:	cmp byte ptr [si], 0h
 		je @@endstr
 		cmp byte ptr [di], 0h
 		je @@endstr
