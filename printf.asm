@@ -9,13 +9,6 @@ global 			_start
 
 _start:			
 
-
-
-			push eax
-			push ebx
-			push ecx
-			push edx
-
 			push 127d
 			push '!'			
 			mov ecx, [number]
@@ -26,15 +19,6 @@ _start:
 			call printf
 			
 			add esp, 6 * 4
-				
-			pop edx
-			pop ecx
-			pop ebx
-			pop eax
-			
-
-
-
 
 
 
