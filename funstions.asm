@@ -2,8 +2,6 @@
 .code
 org 100h
 
-locals @@
-
 start:
 
 
