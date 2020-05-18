@@ -213,7 +213,8 @@ line:		push cx                                 ;
 ; Destr: ax bx di 
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Line_in_vid 	proc
-
+		
+		cld
                 stosw
                 mov al, bl
                 rep stosw
@@ -229,7 +230,8 @@ Line_in_vid 	proc
 ; Destr: cx es 	
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Drawchar	proc
-
+		
+		cld
                 stosw
 
                 ret
@@ -285,6 +287,7 @@ puts_in_vid	proc
 		mov ah, COLOR
 
 print:		mov al, [bx]
+		cld
 		stosw
 		inc bx
 		cmp al, 0
