@@ -299,7 +299,7 @@ print:		mov al, [bx]
 
 
 
-Msg:		db 'Hello', 0
+Msg:	db 'Hello', 0
 arr1:	db 0c9h, 0cdh, 0bbh, 0bah, 0c8h, 0cdh, 0bch
 arr2:	db 0dah, 0c4h, 0bfh, 0b3h, 0c0h, 0c4h, 0d9h
 newarr: db 0   , 0   , 0   , 0   , 0   , 0   , 0 			
