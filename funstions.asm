@@ -2,9 +2,119 @@
 .code
 org 100h
 
-start:
+start:		
+
+;		mov di, offset StrCHA1
+;		mov al, 'a'
+;		mov cx, 11d
+;		call memchr
+;		mov ax, 09h
+;		mov bx, offset numb
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+
+;		mov di, offset StrCHA2
+;		mov al, 'b'
+;		mov cx, 7d
+;		call memset
+;		mov ax, 09h
+;		mov dx, offset SreCHA2
+;		int 21h
 
 
+
+;		mov si, offset StrCHA1
+;		mov di, offset StrCHA2
+;		mov cx, 7d
+;		call memcpy
+;		mov ax, 09h
+;		mov dx, offset StrCHA2
+;		int 21h
+
+				
+;		mov si, offset StrCHA1
+;		mov di, offset StrCHA2
+;		mov cx, 7d
+;		call memcmp
+;		mov ax, 09h
+;		mov bx, offset numb
+;		add di, '0'
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+		
+;		mov si, offset StrHello1
+;		mov di, offset StrHello2
+;		mov cx, 7d
+;		call strcmp
+;		mov ax, 09h
+;		mov bx, offset numb
+;		add di, '0'
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+		
+		
+		
+;		mov si, offset StrHello2
+;		mov di, offset StrHello3
+;		mov cx, 7d
+;		call strcmp
+;		mov ax, 09h
+;		mov bx, offset numb
+;		add di, '0'
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+
+
+
+;		mov di, StrCHA1
+;		call strlen
+;		mov ax, 09h
+;		mov bx, offset numb
+;		add di, '0'
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+
+
+
+
+;		mov di, StrHello1
+;		mov al, 'l'
+;		call strchr
+;		mov ax, 09h
+;		mov bx, offset numb
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+
+
+
+;		mov di, StrHello1
+;		mov al, 'l'
+;		call strrchr
+;		mov ax, 09h
+;		mov bx, offset numb
+;		sub di, bx
+;		add di, '0'
+;		mov byte ptr [bx], di
+;		mov dx, bx
+;		int 21h
+
+		
+		
+;		mov si, offset StrHello2
+;		mov di, offset StrHello3
+;		mov cx, 7d
+;		call strcpy
+;		mov ax, 09h
+;		mov dx, offset StrHello3
+;		int 21h
+	
+	
 		ret
 
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -23,9 +133,6 @@ memchr 		proc
 		
 		ret
 		endp
-
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Fill byte in mem
 ; Entry:	di - pointer of start pos
@@ -42,8 +149,6 @@ memset 		proc
 		
 		ret
 		endp
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Copy piece of mem from source to destination
 ; Entry:	si - pointer of start pos in source
@@ -60,8 +165,6 @@ memcpy 		proc
 		
 		ret
 		endp
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Cmp to piece of mem
 ; Entry:	di - pointer of start in first
@@ -84,14 +187,12 @@ memcmp 		proc
 		
 		ret
 		endp
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Cmp to piece of mem
 ; Entry:	di - pointer of start str
 ;               
 ; Exit          ax
-	; Destr:	cx, di     		
+; Destr:	cx, di     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strlen 		proc
 		
@@ -106,9 +207,8 @@ strlen 		proc
 		
 		ret
 		endp
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-; Find first entering char
+; Find first enter char
 ; Entry:	di - pointer of start str
 ;		al - char to find               
 ; Exit          di - pointer finding char
@@ -126,10 +226,6 @@ strchr 		proc
 		
 		ret
 		endp
-
-	
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Find last entering char
 ; Entry:	di - pointer of start str
@@ -154,8 +250,6 @@ strrchr		proc
 
 		ret
 		endp
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Copy piece of mem from source to destination
 ; Entry:	si - pointer of start pos in source
@@ -177,8 +271,6 @@ strcpy 		proc
 @@endstr:
 		ret
 		endp
-
-
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Cmp to piece of mem
 ; Entry:	di - pointer of start in first
@@ -212,14 +304,14 @@ strcmp 		proc
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-Msg1: db 'CHA cha cha', 00h
+StrCHA1: 	db 'CHA cha cha', 00h, '$'
+StrCHA2: 	db 'CHa chA', 00h, '$'
+StrHello1:	db 'Hello', 00h, '$'
+StrHello2:	db 'hello', 00h, '$'
+StrHello3:	db 'hello', 00h, '$'
 
-Msg2: db 'CHa chA', 00h
+numb:		db ' ', '$' 
+
 
 
 end start
-
-
-
-
-
