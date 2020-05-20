@@ -31,8 +31,8 @@ start:		mov bx, VIDEOSEG
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Draw_anim_frame	proc
 
-		call getint
-		mov si, cx
+		call getint			;input n of style
+		mov si, cx			;
 		
 		call getint        		;
 		mov dh, cl                      ; input x, y of center 
@@ -50,15 +50,15 @@ Draw_anim_frame	proc
 
 		cmp si, 1			; if 1
 		jne m2				; 
-		mov si, offset arr1		; first style
+		mov si, offset st_arr1		; first style
 		jmp found			;
 
 m2:		cmp si, 2			; if 2
 		jne notfound			;
-		mov si, offset arr2		; second style
+		mov si, offset st_arr2		; second style
 		jmp found			;
 
-notfound:	mov si, offset newarr		; else
+notfound:	mov si, offset st_newarr	; else
 		push si				; input 7
 		push ax				; symbols
 		mov cx, 7d			;
@@ -132,15 +132,15 @@ drawframe	proc
 		xor dh, dh          		        ; to byte in
 		add ax, dx      		        ; videoseg
 		mov di, ax     			        ;
-		shl di, 1            	  		;      	
+		shl di, 1            	  		;
                	mov dx, bx	       			;
 		                                	
 		xor cx, cx             			; mov cx length line
 		mov cl, dh             			;
 
-			
-		mov al, [si]				; put symbols into: al	
-		inc si                                  ; 
+							; put symbols into:
+		mov al, [si]				; al	
+		inc si                                  ;
 		mov bl, [si]                            ; bl
 		inc si                                  ;
 		mov bh, [si]                            ; bh
@@ -299,7 +299,7 @@ print:		mov al, [bx]
 
 
 
-Msg:	db 'Hello', 0
-arr1:	db 0c9h, 0cdh, 0bbh, 0bah, 0c8h, 0cdh, 0bch
-arr2:	db 0dah, 0c4h, 0bfh, 0b3h, 0c0h, 0c4h, 0d9h
-newarr: db 0   , 0   , 0   , 0   , 0   , 0   , 0 			
+Msg:		db 'Hello', 0
+st_arr1:	db 0c9h, 0cdh, 0bbh, 0bah, 0c8h, 0cdh, 0bch
+st_arr2:	db 0dah, 0c4h, 0bfh, 0b3h, 0c0h, 0c4h, 0d9h
+st_newarr:	db 0   , 0   , 0   , 0   , 0   , 0   , 0 			
