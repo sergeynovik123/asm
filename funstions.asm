@@ -219,7 +219,7 @@ strchr 		proc
 			
 		xor di, di
                 or cx, 0FFFFh
-@@loop:	        cmp byte ptr [di], 00h
+@@loop:	        cmp byte ptr [di], 0h
 		je @@endstr
 		cld
 		repne scasb
