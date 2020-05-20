@@ -139,7 +139,6 @@ memchr 		proc
 ;              	al - byte to fill
 ;               cx - number of bytes in mem
 ;
-; Exit:
 ; Destr:	cx, di     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 memset 		proc
@@ -155,7 +154,6 @@ memset 		proc
 ;               di - pointer of start pos in destination
 ;               cx - number of bytes in mem
 ;
-; Exit
 ; Destr:	cx, di, si     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 memcpy 		proc
@@ -171,7 +169,7 @@ memcpy 		proc
 ;               si - pointer of start in second
 ;               cx - number of bytes in mem
 ;
-; Exit          ax
+; Exit          ax : = 0 (s1 = s2); < 0 (s1 < s2); > 0 (s1 > s2)
 ; Destr:	cx, di, si     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 memcmp 		proc
@@ -188,10 +186,10 @@ memcmp 		proc
 		ret
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-; Cmp to piece of mem
+; Find length of string
 ; Entry:	di - pointer of start str
 ;               
-; Exit          ax
+; Exit          ax - len
 ; Destr:	cx, di     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strlen 		proc
@@ -211,7 +209,9 @@ strlen 		proc
 ; Find first enter char
 ; Entry:	di - pointer of start str
 ;		al - char to find               
+;
 ; Exit          di - pointer finding char
+;
 ; Destr:	cx, di     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strchr 		proc
@@ -251,12 +251,11 @@ strrchr		proc
 		ret
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-; Copy piece of mem from source to destination
-; Entry:	si - pointer of start pos in source
-;               di - pointer of start pos in destination
-;               cx - number of bytes in mem
+; Copy second string in first string
+; Entry:	di - pointer of start of first string
+;               si - pointer of start of second srting
 ;
-; Exit
+; Exit		
 ; Destr:	cx, di, si     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strcpy 		proc
@@ -266,19 +265,19 @@ strcpy 		proc
 
 @@notzero:	cmp byte ptr [di], 0h
 		je @@endstr		
-         	movsb
-         	jmp @@notzero
+        	movsb
+		jmp @@notzero
 @@endstr:
 		ret
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-; Cmp to piece of mem
-; Entry:	di - pointer of start in first
-;               si - pointer of start in second
+; Cmp strings
+; Entry:	di - pointer of start of first string
+;               si - pointer of start of second srting
 ;               cx - number of bytes in mem
 ;
 ; Exit          ax
-; Destr:	cx, di, si     		
+; Destr:	cx, di, si
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strcmp 		proc
 		
@@ -286,6 +285,7 @@ strcmp 		proc
 		cld
 		
 @@cmp:		cmp byte ptr [si], 0h
+		
 		je @@endstr
 		cmp byte ptr [di], 0h
 		je @@endstr
