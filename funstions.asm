@@ -219,11 +219,13 @@ strchr 		proc
 			
 		xor di, di
                 or cx, 0FFFFh
-@@loop:	        cld
+@@loop:	        cmp byte ptr [di], 00h
+		je @@endstr
+		cld
 		repne scasb
 		jne @@loop
-		dec di	
 		
+@@endstr:	dec di
 		ret
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
