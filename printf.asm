@@ -18,7 +18,7 @@ _start:
 			push newtest
 			call printf
 			
-			add esp, 6 * 4
+			sub esp, 6 * 4
 
 
 
