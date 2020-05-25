@@ -207,40 +207,42 @@ strlen 		proc
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Find first enter char
-; Entry:	di - pointer of start str
-;		al - char to find               
+; Entry:	si - pointer of start str
+;		ah - char to find               
 ;
-; Exit          di - pointer finding char
-;
+; Exit          si - pointer finding char
 ; Destr:	cx, di     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strchr 		proc
 		
-                or cx, 0FFFFh
-@@loop:	        cmp byte ptr [di], 0h
+                mov cx, 0FFFFh
+@@loop:	        cld
+		lodsb 
+		cmp al, 0h
 		je @@endstr
-		cmp byte ptr [di], al
-		inc di
+		cmp ah, al
 		jne @@loop
 		
-@@endstr:	dec di
+@@endstr:	dec si
 		ret
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Find last entering char
 ; Entry:	di - pointer of start str
-;               
+;		ah char to find               
+;
 ; Exit          si
 ; Destr:	cx, di     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strrchr		proc
 		
-                or cx, 0FFFFh
+                mov cx, 0FFFFh
                 xor si, si
-                cld
-
-@@repnez:	cmp byte ptr [di], 0h
+                
+@@repnez:	
+		cmp byte ptr [di], 0h
 		je @@strend
+		cld
 		scasb
 		jne @@repnez
 		mov si, di
