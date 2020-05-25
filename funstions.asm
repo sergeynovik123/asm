@@ -228,22 +228,22 @@ strchr 		proc
 		endp
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Find last entering char
-; Entry:	di - pointer of start str
+; Entry:	si - pointer of start str
 ;		ah char to find               
 ;
-; Exit          si
-; Destr:	cx, di     		
+; Exit          di
+; Destr:	cx, di, si     		
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 strrchr		proc
 		
                 mov cx, 0FFFFh
-                xor si, si
+                xor di, di
                 
-@@repnez:	
-		cmp byte ptr [di], 0h
+@@repnez:	cld
+		lodsb
+		cmp al, 0h
 		je @@strend
-		cld
-		scasb
+		cmp al, ah
 		jne @@repnez
 		mov si, di
 		jmp @@repnez
